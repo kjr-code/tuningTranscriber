@@ -10,5 +10,11 @@ public class App {
         longTuning.viewDetails();
         Tuning brokenTuning = new Tuning("Wonky", "E,A,D,G,H,E");
         brokenTuning.viewDetails();
+
+        Tuning steppedTuning = standardTuning.transpose(1, "Half Step Up");
+        steppedTuning.viewDetails();
+
+        Tuning jonasTuning = standardTuning.transpose(-1, "Half Step Down");
+        jonasTuning.viewDetails();
     }
 }

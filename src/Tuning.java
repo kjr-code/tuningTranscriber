@@ -41,10 +41,41 @@ public class Tuning {
     }
 
     //TODO transpose all notes in the tuning up or down "halfsteps" number of half steps, and return the result
-    public Tuning transpose(int halfsteps){
-        Tuning newTuning = new Tuning();
+    public Tuning transpose(int halfsteps, String newName){
+        //Tuning newTuning = new Tuning();
         int[] currentIndices = new int[6];
         //TODO get each index's "current position" in the chromatic scale and represent it as an int
+        for(int i = 0; i < currentIndices.length; i++){
+            String theNote = notes[i];
+            int theIndex = java.util.Arrays.asList(chromaticScale).indexOf(theNote);
+            currentIndices[i] = theIndex;
+        }
+
+        //TODO combine all 3 of these loops
+        for(int i = 0; i < currentIndices.length; i++){
+            currentIndices[i] += halfsteps;
+            if(currentIndices[i] > 11){
+                currentIndices[i] = currentIndices[i] % 11; //check to see if this behaves as intended
+            } else if(currentIndices[i] < 0){
+                currentIndices[i] += 12;
+            }
+        }
+
+        String[] newNotes = new String[6];
+        String newArg = "";
+        for(int i = 0; i <= currentIndices.length - 1; i++){
+            //TODO you have the indices, now just grab the notes from the chromatic scale 
+            newNotes[i] = chromaticScale[currentIndices[i]];
+            newArg += (newNotes[i] + ",");
+        }
+        //newNotes[currentIndices.length - 1] = chromaticScale[currentIndices.length - 1];
+        //newArg += newNotes[currentIndices.length-1];
+        System.out.println(newArg);
+
+
+
+
+        Tuning newTuning = new Tuning(newName, newArg);
         return newTuning;
     }
 
